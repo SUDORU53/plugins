@@ -8,6 +8,7 @@
 
 const COMMAND = '/salary';
 const INTERVAL_MS = 30 * 60 * 1000;
+const ENABLED_MESSAGE = '§lСКРИПТ АВТО ЗАРПЛАТА ВКЛЮЧЕН';
 
 const STATE_KEY = 'salary_auto_state';
 
@@ -93,5 +94,6 @@ if (eventMessage === COMMAND) {
   state.active = true;
   state.nextRunAt = Date.now() + INTERVAL_MS;
   saveState(state);
+  Chat.log(ENABLED_MESSAGE);
   ensureWorker();
 }
