@@ -344,10 +344,10 @@ img { display: block; max-width: 100%; }
 }
 .about__portrait {
   position: relative;
-  aspect-ratio: 1;
+  aspect-ratio: 4/5;
   border-radius: 40px;
   overflow: hidden;
-  background: var(--bg-dim);
+  background: #111;
 }
 .about__blob {
   position: absolute;
@@ -360,6 +360,24 @@ img { display: block; max-width: 100%; }
 @keyframes blobMove {
   from { transform: scale(1) rotate(0deg); }
   to { transform: scale(1.15) rotate(8deg); }
+}
+
+/* Cut-out portrait, Apple-leadership style: high-contrast mono by
+   default, resolves to full color on hover/focus. */
+.about__photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  filter: grayscale(1) contrast(1.15) brightness(1.02);
+  transition: filter .7s var(--ease), transform .7s var(--ease);
+}
+.about__portrait:hover .about__photo,
+.about__portrait:focus-within .about__photo {
+  filter: grayscale(0) contrast(1.05) brightness(1);
+  transform: scale(1.02);
 }
 .about__text h2 { font-size: clamp(30px, 4vw, 44px); font-weight: 800; margin: 10px 0 20px; letter-spacing: -.02em; }
 .about__text p { color: var(--text-dim); margin-bottom: 16px; font-size: 17px; max-width: 520px; }
