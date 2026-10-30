@@ -283,12 +283,12 @@ img { display: block; max-width: 100%; }
 .work { padding: 140px 24px; max-width: var(--maxw); margin: 0 auto; }
 .work__grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 28px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
 }
 .work-card {
   position: relative;
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   background: var(--bg-dim);
   overflow: hidden;
   display: flex;
@@ -296,11 +296,9 @@ img { display: block; max-width: 100%; }
   transition: transform .5s var(--ease), box-shadow .5s var(--ease);
 }
 .work-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 30px 60px rgba(0,0,0,.12);
+  transform: translateY(-6px);
+  box-shadow: 0 24px 48px rgba(0,0,0,.1);
 }
-.work-card--wide { grid-column: 1 / -1; }
-.work-card--wide .work-card__visual { aspect-ratio: 21/9; }
 
 .work-card__visual {
   position: relative;
@@ -319,17 +317,17 @@ img { display: block; max-width: 100%; }
   transform: scale(1.04);
 }
 
-.work-card__body { padding: 32px; }
+.work-card__body { padding: 22px; }
 .work-card__tag {
   display: inline-block;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
   color: var(--text-dim);
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
-.work-card__body h3 { font-size: 24px; font-weight: 700; margin-bottom: 10px; letter-spacing: -.01em; }
-.work-card__body p { color: var(--text-dim); margin-bottom: 18px; font-size: 15px; }
-.work-card__link { font-weight: 600; color: var(--accent); }
+.work-card__body h3 { font-size: 19px; font-weight: 700; margin-bottom: 8px; letter-spacing: -.01em; }
+.work-card__body p { color: var(--text-dim); margin-bottom: 14px; font-size: 13.5px; line-height: 1.5; }
+.work-card__link { font-weight: 600; color: var(--accent); font-size: 14px; }
 .work-card__link:hover { text-decoration: underline; }
 
 /* =========================================================
@@ -363,7 +361,9 @@ img { display: block; max-width: 100%; }
 }
 
 /* Cut-out portrait, Apple-leadership style: high-contrast mono by
-   default, resolves to full color on hover/focus. */
+   default, cross-fades to the full-color shot on hover/focus.
+   Two baked-in images (not a CSS filter) keep the mono version
+   punchy instead of washed out. */
 .about__photo {
   position: absolute;
   inset: 0;
@@ -371,13 +371,17 @@ img { display: block; max-width: 100%; }
   height: 100%;
   object-fit: cover;
   object-position: top center;
-  filter: grayscale(1) contrast(1.15) brightness(1.02);
-  transition: filter .7s var(--ease), transform .7s var(--ease);
+  transition: opacity .7s var(--ease), transform .7s var(--ease);
 }
-.about__portrait:hover .about__photo,
-.about__portrait:focus-within .about__photo {
-  filter: grayscale(0) contrast(1.05) brightness(1);
-  transform: scale(1.02);
+.about__photo--color { opacity: 1; }
+.about__photo--mono { opacity: 1; }
+.about__portrait:hover .about__photo--mono,
+.about__portrait:focus-within .about__photo--mono {
+  opacity: 0;
+}
+.about__portrait:hover .about__photo--color,
+.about__portrait:focus-within .about__photo--color {
+  transform: scale(1.03);
 }
 .about__text h2 { font-size: clamp(30px, 4vw, 44px); font-weight: 800; margin: 10px 0 20px; letter-spacing: -.02em; }
 .about__text p { color: var(--text-dim); margin-bottom: 16px; font-size: 17px; max-width: 520px; }
@@ -504,13 +508,14 @@ img { display: block; max-width: 100%; }
    RESPONSIVE
    ========================================================= */
 @media (max-width: 900px) {
-  .work__grid { grid-template-columns: 1fr; }
+  .work__grid { grid-template-columns: repeat(2, 1fr); }
   .about__grid { grid-template-columns: 1fr; gap: 40px; }
   .about__portrait { max-width: 360px; margin: 0 auto; }
   .process__list { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 640px) {
+  .work__grid { grid-template-columns: 1fr; }
   .nav__links {
     position: fixed;
     top: 64px; left: 0; right: 0;
