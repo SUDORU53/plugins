@@ -25,12 +25,26 @@
 html { scroll-behavior: smooth; }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif;
   color: var(--text);
   background: var(--bg);
   line-height: 1.5;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+}
+
+/* Display font for headlines — closer to SF Pro Display's geometry */
+h1, h2, h3,
+.nav__logo,
+.hero__title,
+.statement__text,
+.section-head__title,
+.work-card__body h3,
+.about__text h2,
+.process__item h3,
+.contact__content h2,
+.stat__num {
+  font-family: 'Manrope', 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
 }
 
 a { color: inherit; text-decoration: none; }
@@ -285,33 +299,25 @@ img { display: block; max-width: 100%; }
   transform: translateY(-8px);
   box-shadow: 0 30px 60px rgba(0,0,0,.12);
 }
-.work-card--lg { grid-column: span 1; }
+.work-card--wide { grid-column: 1 / -1; }
+.work-card--wide .work-card__visual { aspect-ratio: 21/9; }
 
 .work-card__visual {
   position: relative;
-  aspect-ratio: 16/10;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, var(--c1), var(--c2));
-  padding: 36px;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  background: var(--bg-dim);
 }
-.device {
-  background: rgba(0,0,0,.85);
-  border-radius: 20px;
-  padding: 10px;
-  box-shadow: 0 20px 40px rgba(0,0,0,.25);
+.work-card__visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform .6s var(--ease);
 }
-.device__screen {
-  background: rgba(255,255,255,.92);
-  border-radius: 12px;
-  width: 100%; height: 100%;
+.work-card:hover .work-card__visual img {
+  transform: scale(1.04);
 }
-.device--phone { width: 120px; height: 240px; border-radius: 28px; }
-.device--phone .device__screen { border-radius: 20px; }
-.device--browser { width: 320px; height: 190px; border-radius: 12px; padding: 10px 10px 10px; }
-.device--tablet { width: 220px; height: 160px; border-radius: 16px; }
-.device--watch { width: 110px; height: 130px; border-radius: 34px; }
 
 .work-card__body { padding: 32px; }
 .work-card__tag {
